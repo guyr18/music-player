@@ -7,7 +7,6 @@ from spotipy.oauth2 import SpotifyClientCredentials
 from io import BytesIO
 from PIL import Image, ImageTk
 from CoverArt import CoverArt
-import FavoritesPage
 import requests
 import AuthPage
 
@@ -102,15 +101,6 @@ class PortalPage(Page):
         Resources.AUDIO_PLAYER_CMP.destroy()
         Resources.AUDIO_PLAYER_CMP = None
         Resources.TK_CLIENT.showFrame(AuthPage.AuthPage)
-
-    """
-    
-    HandleFavorites() is an event handler that is trigger when the favorites button is clicked. It will transition to the favorites frame.
-
-    """
-
-    def handleFavorites(self) -> None:
-        Resources.TK_CLIENT.showFrame(FavoritesPage.FavoritesPage)
 
     """
 
