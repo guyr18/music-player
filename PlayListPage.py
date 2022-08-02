@@ -10,6 +10,14 @@ import requests
 
 class PlayListPage(Page):
 
+    
+    """
+    
+    __init__(parent) takes one parameter, parent. Parent is a tk.Frame instance indicating
+    the parent container for this PlayListPage instance.
+
+    """
+    
     def __init__(self, parent: tk.Frame):
         super().__init__(parent)
         self.configure(bg="#FFF")

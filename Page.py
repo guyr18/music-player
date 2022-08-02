@@ -7,6 +7,7 @@ Page is an abstract class that derives from a tk.Frame. It is intended
 to modularize a standard screen component.
 
 """
+
 class Page(ABC, tk.Frame):
 
     def __init__(self, parent: tk.Frame):
@@ -18,7 +19,9 @@ class Page(ABC, tk.Frame):
     Layout(*args) is an abstract method that must be overridden in children classes.
     It is intended to serve as an area for allocating UI components to the deriving
     instance.
+
     """
+
     @abstractmethod
     def layout(self, *args) -> None:
         pass
@@ -26,7 +29,9 @@ class Page(ABC, tk.Frame):
     """
     
     Destroy() invokes the .destroy() method on all children of @see self.widgets.
+
     """
+    
     def destroy(self) -> None:
         for widget in self.widgets:
             if widget:

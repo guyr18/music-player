@@ -12,6 +12,7 @@ class PasswordPlaceholderEntry(PlaceholderEntry):
         textColor -> The color of the text content represented as a hexadecimal string.
             
     """
+    
     def __init__(self, placeholder, master, textColor):
         super().__init__(placeholder, master, textColor)
         self.configure(show='*')

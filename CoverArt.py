@@ -20,6 +20,7 @@ class CoverArt(tk.Label):
                       listen for a click event.
 
     """
+    
     def __init__(self, parent: tk.Frame, uri: str, name: str, desc: str, image: Image, caller: Any = None, clickDisabled: bool = False):
         super().__init__(parent)
         self.uri = uri
@@ -36,12 +37,30 @@ class CoverArt(tk.Label):
             self.bind("<Enter>", self.handleHoverIn)
             self.bind("<Leave>", self.handleHoverOut)
 
+    """
+    
+    HandleClick() is an event-binding that is executed when this CoverArt instance is clicked.
+
+    """
+
     def handleClick(self, *args) -> None:
         Resources.TK_CLIENT.showFrame(PlayListPage, copy.deepcopy(self.uri))
+
+    """
+    
+    HandleHoverIn() is an event-binding that is executed when this CoverInstance is hovered.
+
+    """
 
     def handleHoverIn(self, *args) -> None:
         if self.caller:
             self.caller.propagateCoverArt(self.name, self.desc, False)
+
+    """
+    
+    HandleHoverOut() is an event-binding that is executed when this CoverArt instance loses its hover.
+
+    """
 
     def handleHoverOut(self, *args) -> None:
         if self.caller:

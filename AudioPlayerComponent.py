@@ -80,6 +80,10 @@ class AudioPlayerComponent(tk.Canvas):
             self.favoriteButton.bind("<Button-1>", self.handleFavoriteClick)
         else:
             self.favoriteButton.configure(image=self.favoriteButtonImage)
+        if self.isFavorited:
+            self.curSong.favorite()
+        else:
+            self.curSong.unfavorite()
 
     """
     
@@ -96,11 +100,14 @@ class AudioPlayerComponent(tk.Canvas):
             print("Added {key} as new favorite to redis datastore.")
             self.favoriteButtonImage.configure(file="images/heartfill.png")
             self.favoriteButton.configure(image=self.favoriteButtonImage)
+            self.curSong.favorite()
         else:
             print("Removing {self.curSong.id} from redis datastore.")
             Resources.REDIS_DB.redisStdDel(key)
             self.favoriteButtonImage.configure(file="images/heartnofill.png")
             self.favoriteButton.configure(image=self.favoriteButtonImage)
+            self.curSong.unfavorite()
+        self.isFavorited = self.curSong.favorited
 
     """
     

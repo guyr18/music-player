@@ -14,14 +14,18 @@ class AuthPage(Page):
     
     __init__(parent) takes one parameter, parent. Parent is a tk.Frame instance indicating
     the parent container for this AuthPage instance.
+
     """
+    
     def __init__(self, parent: tk.Frame):
         super().__init__(parent)
 
     """
     
     Layout(*args) is an overridden abstract method intended to layout the UI components for this AuthPage instance.
+
     """
+
     def layout(self, *args):
 
         # Setup UI
@@ -77,7 +81,9 @@ class AuthPage(Page):
     """
     
     HandleLoginClick() is an event-binded method that invokes when the login button (@see self.loginButton) is clicked.
+
     """
+
     def handleLoginClick(self):
         if Resources.REDIS_DB == None:
             self.errorMessageLabel.configure(text="Server down, please try again later!")
@@ -99,6 +105,8 @@ class AuthPage(Page):
     """
     
     HandleCreateAccountClick() is an event-binded method that invokes when the create account button (@see self.createAccountButton) is clicked.
+
     """
+
     def handleCreateAccountClick(self):
         print("Create new account")
