@@ -101,4 +101,8 @@ The credentials that this file creates are as follows:
  
 This should be entered at the initial authentication / login screen.
 
-You should now be ready to run the application.
+You should now be ready to run the application by running the **main.py** script.
+
+```
+python3.10 main.py
+```
