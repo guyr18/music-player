@@ -1,4 +1,7 @@
 ## Music Player
+
+**INSERT VIDEO HERE**
+
 Music Player is an educational application to further my understanding of Python 3 and Redis. This application consists of the following
 components / functionality:  
 
@@ -98,4 +101,4 @@ The credentials that this file creates are as follows:
  
 This should be entered at the initial authentication / login screen.
 
-You should now be ready to run the application. Below is a sample video demonstrating the intended use of the functionality:
+You should now be ready to run the application.
