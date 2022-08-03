@@ -74,6 +74,20 @@ dependencies that are found in **requirements.txt**. To do so, run the following
 pip install -r requirements.txt
 ```
 
+As a side note, an additional error that I have encountered on my machine is similar to the following:
+
+```
+ImportError: cannot import name 'html5lib' from 'pip._vendor'
+```
+
+If you happen to encounter this error, the solution that I've found to be most effective is the following:
+
+```
+curl -sS https://bootstrap.pypa.io/get-pip.py | python3.10
+```
+
+After issuing this command, you should be able to successfully install **requirements.txt**.
+
 Following this, you will need to ensure that your Redis server is running properly. I will not cover that in this tutorial but a great reference is the
 following: https://redis.io/docs/getting-started/  
 
