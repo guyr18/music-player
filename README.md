@@ -1,6 +1,10 @@
 ## Music Player
 
-**INSERT VIDEO HERE**
+
+
+https://user-images.githubusercontent.com/46636441/182569210-b5547110-553d-42c9-b879-bc7cf257b056.mp4
+
+
 
 Music Player is an educational application to further my understanding of Python 3 and Redis. This application consists of the following
 components / functionality:  
