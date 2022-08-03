@@ -32,6 +32,7 @@ class PlayListPage(Page):
 
     def layout(self, *args) -> None:
         
+        print("laywe")
         self.audioPlayerComponent = Resources.AUDIO_PLAYER_CMP
         temp = requests.get(args[0])
         raw = temp.content
@@ -112,3 +113,4 @@ class PlayListPage(Page):
                     entry.destroy()
         except Exception:
             pass
+        self.widgets = []

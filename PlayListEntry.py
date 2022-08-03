@@ -52,6 +52,7 @@ class PlayListEntry(tk.LabelFrame):
     
     def verifyComponents(self) -> None:
         if not hasattr(self, 'titleLabel'):
+            print("yea")
             self.titleLabel = tk.Label(text=self.title, bg=self.bg, font=("SegoeUI", 10))
         if not hasattr(self, 'artistLabel'):
             self.artistLabel = tk.Label(text=self.artist, bg=self.bg, font=("SegoeUI", 10))
@@ -70,7 +71,6 @@ class PlayListEntry(tk.LabelFrame):
 
         if self.selected == True: return
         
-        print(f"here={self.uri}")
         result = Resources.SPOTIFY.track(self.uri)
         previewURL = result['preview_url'] 
         if previewURL is None:
@@ -144,6 +144,6 @@ class PlayListEntry(tk.LabelFrame):
     """
 
     def destroy(self) -> None:
-        self.titleLabel.destroy()
-        self.artistLabel.destroy()
-        self.durationLabel.destroy()
+        self.titleLabel.configure(text="")
+        self.artistLabel.configure(text="")
+        self.durationLabel.configure(text="")
