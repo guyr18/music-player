@@ -2,6 +2,7 @@ import tkinter as tk
 from Page import Page
 from Resources import Resources
 from AudioPlayerComponent import AudioPlayerComponent
+from FavoritesPage import FavoritesPage
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
 from io import BytesIO
@@ -88,6 +89,20 @@ class PortalPage(Page):
         self.logoutButton = tk.Button(Resources.TK_CLIENT, command=self.handleLogout, borderwidth=1, bg="purple", activebackground="#FF5733", activeforeground="#FFF", fg="#FFF", text="Logout", font=("SegoeUI", 12))
         self.logoutButton.place(width=120, relx=.9, rely=.25, anchor='center')
         self.widgets.append(self.logoutButton)
+
+        # Initialize favorites button
+        self.favoritesButton = tk.Button(Resources.TK_CLIENT, command=self.handleFavorites, borderwidth=1, bg="purple", activebackground="#FF5733", activeforeground="#FFF", fg="#FFF", text="Favorites", font=("SegoeUI", 12))
+        self.favoritesButton.place(width=180, relx=.82, rely=.76, anchor='center')
+        self.widgets.append(self.favoritesButton)
+
+    """
+    
+    HandleFavorites() is an event handler that is triggerred when the favorites button is clicked.
+
+    """
+
+    def handleFavorites(self) -> None:
+        Resources.TK_CLIENT.showFrame(FavoritesPage)
 
     """
     

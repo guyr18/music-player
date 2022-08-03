@@ -5,8 +5,10 @@ import os
  
 # Clean sounds directory on startup.
 dir = 'sounds/'
-for f in os.listdir(dir):
-    os.remove(os.path.join(dir, f))
+
+if os.path.isdir(dir):
+    for f in os.listdir(dir):
+        os.remove(os.path.join(dir, f))
 
 wrapper = RedisWrapper("conf.txt")
 wrapper.connect()

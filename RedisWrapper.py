@@ -91,3 +91,12 @@ class RedisWrapper:
 
     def redisStdDel(self, key: Any) -> int:
         return self.redis.delete(key)
+
+    """
+    
+    RedisStdGetAll_StartingWith(prefix) returns an iterable containing all keys starting with @param prefix.
+
+    """
+
+    def redisStdGetAll_StartingWith(self, prefix: str) -> Any:
+        return self.redis.scan_iter(prefix)

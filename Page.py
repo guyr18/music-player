@@ -36,4 +36,5 @@ class Page(ABC, tk.Frame):
         for widget in self.widgets:
             if widget:
                 widget.destroy()
+        self.widgets = []
 

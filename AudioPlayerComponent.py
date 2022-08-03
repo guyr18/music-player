@@ -5,6 +5,7 @@ from pygame import mixer
 import Song
 from mutagen.mp3 import MP3
 from Resources import Resources
+from typing import Tuple
 from json import dumps
 
 """
@@ -68,6 +69,9 @@ class AudioPlayerComponent(tk.Canvas):
     """
 
     def setSong(self, song: Song.Song) -> None:
+        mixer.music.stop()
+        self.lastPositionSaved = -1.0
+        self.timerText.clear()
         self.curSong = song
         if self.audioControlButton is not None:
             self.audioControlButton.bind("<Button>", self.audioControlButton.handleClick)
@@ -78,6 +82,7 @@ class AudioPlayerComponent(tk.Canvas):
             self.favoriteButton = tk.Label(Resources.TK_CLIENT, image=self.favoriteButtonImage, bd=0)
             self.favoriteButton.place(relx=0.16, rely=0.08, anchor='center')
             self.favoriteButton.bind("<Button-1>", self.handleFavoriteClick)
+            self.widgets.append(self.favoriteButton)
         else:
             self.favoriteButton.configure(image=self.favoriteButtonImage)
         if self.isFavorited:
@@ -116,9 +121,9 @@ class AudioPlayerComponent(tk.Canvas):
 
     """
 
-    def propagatePlay(self) -> None:
+    def propagatePlay(self, switchSong) -> None:
         if self.curSong:            
-            if self.audioControlButton.playing and not self.audioControlButton.paused:
+            if self.audioControlButton.playing and not self.audioControlButton.paused and not switchSong:
                 mixer.music.rewind()
                 mixer.music.play(start=self.lastPositionSaved)
 
@@ -128,17 +133,29 @@ class AudioPlayerComponent(tk.Canvas):
                 mixer.music.play()
                 self.timerText.clear()
             
-            duration = MP3("sounds/" + self.curSong.uri).info.length
-            mins = int(duration // 60)
-            secs = int(duration - (mins * 60))
-            strSecs = "0" + str(secs) if secs < 10 else str(secs)
-            strDuration = f"{str(mins)}:{strSecs}"
+            durationData = self.getDurationString(f"sounds/{self.curSong.uri}")
             self.updateTrackText(self.curSong.name)
-            self.updateTimerText(strDuration)
-            self.audioControlButton.play()
+            self.updateTimerText(durationData[1])
+            self.audioControlButton.play(invoke=False)
             self.audioControlButton.update()
-            self.timerText.maxms = int((duration - 1) * 1000)
+            self.timerText.maxms = int((durationData[0] - 1) * 1000)
             self.timerText.start()
+
+    """ 
+    
+    GetDurationString(path) returns a tuple of (int, str) where the first member represents
+    the duration of the MP3 file lothcated at sounds/path and the second member represents
+    the formatted duration string (m:ss); m is a single digit string representing minutes
+    and ss is a two-digit string representing seconds.
+
+    """
+
+    def getDurationString(self, path: str) -> Tuple:
+        duration = MP3(path).info.length
+        mins = int(duration // 60)
+        secs = int(duration - (mins * 60))
+        strSecs = "0" + str(secs) if secs < 10 else str(secs)
+        return (duration, f"{str(mins)}:{strSecs}")
 
     """
     

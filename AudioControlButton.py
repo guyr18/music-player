@@ -56,16 +56,18 @@ class AudioControlButton(tk.Button):
 
     """
     
-    Play() will update the state of @see self.playing if it is false. And otherwise, will do nothing.
+    Play(invoke) will update the state of @see self.playing if it is false. And otherwise, will do nothing.
+    If invoke is set to true, it will explicitly invoke AudioPlayerComponent.propogatePlay(). Otherwise,
+    this method does not get invoked.
 
     """
 
-    def play(self) -> None:
+    def play(self, invoke=True) -> None:
         if not self.playing:
             self.playing = True
             self.paused = False
-            if self.caller:
-                self.caller.propagatePlay()
+            if self.caller and invoke:
+                self.caller.propagatePlay(False)
 
     """
     

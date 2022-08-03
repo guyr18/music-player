@@ -11,6 +11,8 @@ import requests
 class PlayListPage(Page):
 
     
+    MAX_ITEMS = 15
+
     """
     
     __init__(parent) takes one parameter, parent. Parent is a tk.Frame instance indicating
@@ -42,7 +44,7 @@ class PlayListPage(Page):
         items = Resources.SPOTIFY.playlist(id)['tracks']['items']
         lastY = -1
 
-        for i in range(0, 15):
+        for i in range(0, PlayListPage.MAX_ITEMS):
             track = items[i]['track']
             artists = track['artists']
             strUri = track['uri']
@@ -91,7 +93,7 @@ class PlayListPage(Page):
             if entry != exclude:
                 entry.titleLabel.configure(fg="#000", font=("SegoeUI", 10))
                 entry.artistLabel.configure(fg="#000", font=("SegoeUI", 10))
-                entry.artistLabel.configure(fg="#000", font=("SegoeUI", 10))
+                entry.durationLabel.configure(fg="#000", font=("SegoeUI", 10))
                 self.selected = False
 
     """

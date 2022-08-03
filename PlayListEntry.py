@@ -1,6 +1,7 @@
 import tkinter as tk
 from Resources import Resources
 from Song import Song
+from typing import List
 import requests
 import os
 
@@ -44,14 +45,32 @@ class PlayListEntry(tk.LabelFrame):
 
     """
     
+    VerifyComponents() verifies that the widgets of this component still exist and have not been garbage collected. If they
+    have been garbage collected, instances are recreated.
+
+    """
+    
+    def verifyComponents(self) -> None:
+        if not self.titleLabel:
+            self.titleLabel = tk.Label(text=self.title, bg=self.bg, font=("SegoeUI", 10))
+        if not self.artistLabel:
+            self.artistLabel = tk.Label(text=self.artist, bg=self.bg, font=("SegoeUI", 10))
+        if not self.durationLabel:
+            self.durationLabel = tk.Label(text=self.duration, bg=self.bg, font=("SegoeUI", 10))
+
+    """
+    
     OnClick() is an event binding that executes when this PlayListEntry object is clicked.
 
     """
 
     def onClick(self, *args) -> None:
 
-        if self.selected: return
+        self.verifyComponents()
+
+        if self.selected == True: return
         
+        print(f"here={self.uri}")
         result = Resources.SPOTIFY.track(self.uri)
         previewURL = result['preview_url'] 
         if previewURL is None:
@@ -67,11 +86,14 @@ class PlayListEntry(tk.LabelFrame):
         binary = requests.get(previewURL).content
         slice = previewURL[35:] + '.mp3'
 
+        if not os.path.isdir("sounds"):
+            os.makedirs("sounds")
+
         with open(os.path.join("sounds", slice), 'wb') as f:
             f.write(binary)
 
         Resources.AUDIO_PLAYER_CMP.setSong(Song(result['id'], self.fullTitle, slice, False))
-        Resources.AUDIO_PLAYER_CMP.propagatePlay()
+        Resources.AUDIO_PLAYER_CMP.propagatePlay(True)
 
     """
     
@@ -80,8 +102,8 @@ class PlayListEntry(tk.LabelFrame):
     """
 
     def onHoverIn(self, *args) -> None:
-
         if not self.selected:
+            self.verifyComponents()
             self.titleLabel.configure(fg="purple", font=("SegoeUI 10 bold"))
             self.artistLabel.configure(fg="purple", font=("SegoeUI 10 bold"))
             self.durationLabel.configure(fg="purple", font=("SegoeUI 10 bold"))
@@ -94,20 +116,26 @@ class PlayListEntry(tk.LabelFrame):
     
     def onHoverOut(self, *args) -> None:
         if not self.selected:
+            self.verifyComponents()
             self.titleLabel.configure(fg="#000", font=("SegoeUI", 10))
             self.artistLabel.configure(fg="#000", font=("SegoeUI", 10))
             self.durationLabel.configure(fg="#000", font=("SegoeUI", 10))
 
     """
     
-    Render(rely) is a helper method for setting absolute positioning, given a dynamic list.
+    Render(rely, relx) is a helper method for setting absolute positioning, given a dynamic list. Relx
+    is a default parameter specifying three lists of floats. These values should range from 0 to 1 and
+    may be used to override the default x coordinate placement.
 
     """
 
-    def render(self, rely: int) -> None:
-        self.titleLabel.place(relx=.55, rely=rely, anchor='center')
-        self.artistLabel.place(relx=.74, rely=rely, anchor='center')
-        self.durationLabel.place(relx=.93, rely=rely, anchor='center')
+    def render(self, rely: int,  relx: List[float] = None) -> None:
+
+        xs = [.55, .74, .93] if relx == None else relx
+        self.verifyComponents()
+        self.titleLabel.place(relx=xs[0], rely=rely, anchor='center')
+        self.artistLabel.place(relx=xs[1], rely=rely, anchor='center')
+        self.durationLabel.place(relx=xs[2], rely=rely, anchor='center')
     
     """
     
