@@ -51,11 +51,11 @@ class PlayListEntry(tk.LabelFrame):
     """
     
     def verifyComponents(self) -> None:
-        if not self.titleLabel:
+        if not hasattr(self, 'titleLabel'):
             self.titleLabel = tk.Label(text=self.title, bg=self.bg, font=("SegoeUI", 10))
-        if not self.artistLabel:
+        if not hasattr(self, 'artistLabel'):
             self.artistLabel = tk.Label(text=self.artist, bg=self.bg, font=("SegoeUI", 10))
-        if not self.durationLabel:
+        if not hasattr(self, 'durationLabel'):
             self.durationLabel = tk.Label(text=self.duration, bg=self.bg, font=("SegoeUI", 10))
 
     """
