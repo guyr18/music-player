@@ -1,7 +1,7 @@
 from RedisWrapper import RedisWrapper
 from json import dumps
 
-wrapper = RedisWrapper()
+wrapper = RedisWrapper("conf.txt")
 wrapper.connect()
 jsonValue = {
   "email": "admin@test.com",
