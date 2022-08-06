@@ -1,5 +1,10 @@
 ## Music Player
 
+<img src="https://user-images.githubusercontent.com/46636441/183250772-6f179a3a-2ff4-4dd4-b28f-5cfd95861857.png" width="500" />
+<img src="https://user-images.githubusercontent.com/46636441/183250773-47a796c2-b27a-4ec7-9e7d-4a7fd90fd3e5.png" width="500" />
+<img src="https://user-images.githubusercontent.com/46636441/183250775-8eb9dc10-35d8-4a2b-bba3-49835b44c7c4.png" width="500" />
+<img src="https://user-images.githubusercontent.com/46636441/183250777-d52eabfb-6d79-4808-8711-44dc1afa0078.png" width="500" />
+
 
 
 https://user-images.githubusercontent.com/46636441/182569210-b5547110-553d-42c9-b879-bc7cf257b056.mp4
